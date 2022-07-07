@@ -15,6 +15,9 @@ const PageContainer = ({ pageTitle, pageContent, showCart, meta }) => {
     return (
         <>
             <Head>
+                <style>
+                    <link href="http://fonts.cdnfonts.com/css/proxima-nova-2" rel="stylesheet"></link>
+                </style>
                 <title>{pageTitle}</title>
             </Head>
             <section className={styles['b-page-container-wrapper']}>
