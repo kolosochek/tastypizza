@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/FilterByNavbar.module.scss"
-import { setActiveFilter } from "./activeStateSlice";
-import { sortCategoryByFilter } from "./categorySlice";
+import { setActiveFilter } from "../../redux/activeStateSlice";
+import { sortCategoryByFilter } from "../../redux/categorySlice";
 
 const FilterBy = ({ filterItems }) => {
     const [div, setDiv] = useState({ isHidden: true, activeItem: false })
@@ -46,10 +46,10 @@ const FilterBy = ({ filterItems }) => {
                 <section id="filterBy" style={style}
                     className={styles['b-list-wrapper']}>
                     <ul className={styles['b-list']}>
-                        {filterItems.map(function (item, i) {
+                        {filterItems?.map(function (item, i) {
                             const [href, title] = item;
                             return (
-                                <li key={href} className={title.toLowerCase() == activeState.activeFilter.toLowerCase() ? styles['b-list-item'] + ' ' + styles['state__active'] : styles['b-list-item']}>
+                                <li key={href} className={title.toLowerCase() == activeState.activeFilter ? styles['b-list-item'] + ' ' + styles['state__active'] : styles['b-list-item']}>
                                     <a onClick={setFilter}
                                         className={styles['b-link']}>{title}</a>
                                 </li>

@@ -2,7 +2,7 @@ import PageContainer from "./components/PageContainer";
 // redux
 import { useSelector } from "react-redux";
 import { useDispatch } from 'react-redux'
-import { clearCart, deleteCartItemById, incrementCartItemById, decrementCartItemById } from "./components/cartSlice";
+import { clearCart, deleteCartItemById, incrementCartItemById, decrementCartItemById } from "../redux/cartSlice";
 // css
 import styles from "../styles/cart.module.scss"
 import Image from "next/image";

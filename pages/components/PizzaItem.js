@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../../styles/PizzaItem.module.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../components/cartSlice";
+import { addToCart } from "../../redux/cartSlice";
 
 const PizzaItem = ({ pizzaItem }) => {
     // pizzaOptions params
@@ -24,12 +24,12 @@ const PizzaItem = ({ pizzaItem }) => {
     const [size, setSize] = useState({ pizzaSize: pizzaSizeArr[0][1], pizzaSizePrice: 0 });
     const [quantity, setQuantity] = useState(0);
     // create page vars
-    const pizzaPrice = parseInt(size.pizzaSizePrice || dough.pizzaDoughPrice ? parseInt(pizzaItem.price) + size.pizzaSizePrice + dough.pizzaDoughPrice : pizzaItem.price)
+    const pizzaPrice = parseInt(size.pizzaSizePrice || dough.pizzaDoughPrice ? parseInt(pizzaItem?.price) + size.pizzaSizePrice + dough.pizzaDoughPrice : pizzaItem?.price)
     const pizzaObject = {
-        'image': pizzaItem.image,
-        'title': pizzaItem.title,
-        'doughType': dough.doughType,
-        'sizeType': size.pizzaSize,
+        'image': pizzaItem?.image,
+        'title': pizzaItem?.title,
+        'doughType': dough?.doughType,
+        'sizeType': size?.pizzaSize,
         'pizzaPrice': pizzaPrice,
     }
     // custom functions
@@ -54,16 +54,16 @@ const PizzaItem = ({ pizzaItem }) => {
                 <article className={styles['b-pizza']}>
                     <section className={styles['b-pizza-image-wrapper']}>
                         <Image
-                            src={pizzaItem.image}
+                            src={pizzaItem?.image}
                             width={260}
                             height={260}
                             alt={'pizza item image'} 
                             />
                     </section>
-                    <h3 className={styles['b-pizza-title']}>{pizzaItem.title}</h3>
+                    <h3 className={styles['b-pizza-title']}>{pizzaItem?.title}</h3>
                     <section className={styles['b-pizza-options']}>
                         <section className={styles['b-dough-type']}>
-                            {doughTypeArr.map(function (item, i) {
+                            {doughTypeArr?.map(function (item, i) {
                                 const [href, title, doughExtracost] = item;
                                 const classes = styles['b-link'] + ' ' + styles['state__active'];
                                 return (
@@ -78,7 +78,7 @@ const PizzaItem = ({ pizzaItem }) => {
                             })}
                         </section>
                         <section className={styles['b-pizza-size']}>
-                            {pizzaSizeArr.map(function (item, i) {
+                            {pizzaSizeArr?.map(function (item, i) {
                                 const [href, title, sizeExtracost = 0] = item;
                                 const classes = styles['b-link'] + ' ' + styles['state__active'];
                                 return (

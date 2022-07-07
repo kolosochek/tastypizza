@@ -1,5 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
-import pizzas from '../../pizzas_lorem_ipsum'
+import pizzas from '../pizzas_lorem_ipsum'
 
 export const categorySlice = createSlice({
     name: 'category',

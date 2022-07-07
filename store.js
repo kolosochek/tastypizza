@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import activeStateReducer from './pages/components/activeStateSlice'
-import cartReducer from './pages/components/cartSlice'
-import categoryReducer from './pages/components/categorySlice'
+import activeStateReducer from './redux/activeStateSlice'
+import cartReducer from './redux/cartSlice'
+import categoryReducer from './redux/categorySlice'
 
 export default configureStore({
   reducer: {

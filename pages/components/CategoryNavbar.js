@@ -3,8 +3,8 @@ import styles from "../../styles/CategoryNavbar.module.scss"
 import { useState } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { getItemsByCategory, sortCategoryByFilter } from "./categorySlice";
-import { setActiveCategory, setActiveFilter } from "./activeStateSlice";
+import { getItemsByCategory, sortCategoryByFilter } from "../../redux/categorySlice";
+import { setActiveCategory } from "../../redux/activeStateSlice";
 
 
 
@@ -22,7 +22,7 @@ const CategoryNavbar = ({ categoryItems }) => {
             setCategory({ activeItem: text });
             dispatch(setActiveCategory(text))
             dispatch(getItemsByCategory(text))
-            dispatch(sortCategoryByFilter(activeState.activeFilter))
+            dispatch(sortCategoryByFilter(activeState?.activeFilter))
         }
     }
 
@@ -30,11 +30,11 @@ const CategoryNavbar = ({ categoryItems }) => {
         <>
             <navbar id="categoryNavbar" className={styles['b-category-navbar']}>
                 <ul className={styles['b-list']}>
-                    {categoryItems.map(function (item, idx) {
+                    {categoryItems?.map(function (item, idx) {
                         const [href, title] = item;
                         return (
                             <li key={href} className={
-                                activeState.activeCategory && activeState.activeCategory.toLowerCase() == title.toLowerCase() ? 
+                                activeState?.activeCategory && activeState?.activeCategory.toLowerCase() == title.toLowerCase() ? 
                                     styles['b-list-item'] + ' ' + styles['state__active']  
                                 : styles['b-list-item']
                                 }>
