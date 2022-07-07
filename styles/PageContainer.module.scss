@@ -1,0 +1,50 @@
+.b-page-container-wrapper {
+    background: #FFF;
+    margin: 43px 45px;
+    border-radius: 10px;
+    flex-grow: 1;
+
+    .b-page-container {}
+
+}
+
+
+/* Header */
+.b-header-container {
+    border-bottom: 2px #F7F7F7 solid;
+    padding-bottom: 35px;
+
+
+    .b-header {
+        display: flex;
+        margin: 50px 67px 0px;
+
+        .b-logo {
+            margin-right: 20px;
+        }
+
+        .b-header-title-wrapper {
+
+            .b-header-title {
+                color: #181818;
+                font-style: normal;
+                text-transform: uppercase;
+            }
+
+            .b-plain-text {
+                color: #7B7B7B;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+/* Main */
+.b-main-wrapper {
+    .b-main {
+        //display: flex;
+        margin: 40px 67px 0;
+
+        
+    }
+}

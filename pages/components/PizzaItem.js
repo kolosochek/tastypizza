@@ -1,37 +1,51 @@
 import Link from "next/link";
 import Image from "next/image";
-import styles from "../../styles/PizzaItem.module.scss"
+import styles from "../../styles/PizzaItem.module.scss";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../components/cartSlice";
 
-const doughTypeArr = [
-    ['#dough-type-thin', 'тонкое', 0],
-    ['#dough-type-traditional', 'традиционное', 100],
-]
-
-const pizzaSizeArr = [
-    ['#size-26', '26 см', 0],
-    ['#size-32', '32 см', 250],
-    ['#size-40', '40 см', 500],
-]
-
-const PizzaItem = ({ pizzaItem, updateCart }) => {
-    var resultPrice = parseInt(pizzaItem.price);
-    const [dough, setDough] = useState({ doughType: 0, pizzaDoughPrice: 0 });
-    const [size, setSize] = useState({ pizzaSize: 0, pizzaSizePrice: 0 });
-    const [quantity, setQuantity] = useState({ pizzaQuantity: 0 });
-    const addToCartInitial = <a onClick={setPizzaQuantity} className={styles['b-link']}>Добавить</a>
-    const addToCart = <a onClick={setPizzaQuantity} className={styles['b-link']}>Добавить<span className={styles['b-pizza-quantity']}>{quantity.pizzaQuantity}</span></a>
-
-    function setDoughType() {
-        setDough({ doughType: event.target.text, pizzaDoughPrice: parseInt(event.target.attributes.doughExtracost.value) })
+const PizzaItem = ({ pizzaItem }) => {
+    // pizzaOptions params
+    const doughTypeArr = [
+        ['#dough-type-thin', 'тонкое', 0],
+        ['#dough-type-traditional', 'традиционное', 100],
+    ]
+    const pizzaSizeArr = [
+        ['#size-26', '26 см', 0],
+        ['#size-32', '32 см', 250],
+        ['#size-40', '40 см', 500],
+    ]
+    // redux
+    const cart = useSelector((state) => state.cart.value);
+    const dispatch = useDispatch();
+    // react hooks
+    const [dough, setDough] = useState({ doughType: doughTypeArr[0][1], pizzaDoughPrice: 0 });
+    const [size, setSize] = useState({ pizzaSize: pizzaSizeArr[0][1], pizzaSizePrice: 0 });
+    const [quantity, setQuantity] = useState(0);
+    // create page vars
+    const pizzaPrice = parseInt(size.pizzaSizePrice || dough.pizzaDoughPrice ? parseInt(pizzaItem.price) + size.pizzaSizePrice + dough.pizzaDoughPrice : pizzaItem.price)
+    const pizzaObject = {
+        'image': pizzaItem.image,
+        'title': pizzaItem.title,
+        'doughType': dough.doughType,
+        'sizeType': size.pizzaSize,
+        'pizzaPrice': pizzaPrice,
+    }
+    // custom functions
+    function setDoughType(e) {
+        e.preventDefault();
+        setDough({ doughType: e.target.text, pizzaDoughPrice: parseInt(e.target.attributes.doughExtracost.value) });
     }
 
-    function setPizzaSize() {
-        setSize({ pizzaSize: event.target.text, pizzaSizePrice: parseInt(event.target.attributes.sizeExtracost.value) })
+    function setPizzaSize(e) {
+        e.preventDefault();
+        setSize({ pizzaSize: e.target.text, pizzaSizePrice: parseInt(e.target.attributes.sizeExtracost.value) });
     }
 
     function setPizzaQuantity() {
-        setQuantity({ pizzaQuantity: quantity.pizzaQuantity + 1})
+        event.preventDefault();
+        setQuantity(parseInt(quantity) + 1);
     }
 
     return (
@@ -56,7 +70,7 @@ const PizzaItem = ({ pizzaItem, updateCart }) => {
                                             onClick={setDoughType}
                                             className={(!dough.doughType && i == 0) ? classes : (dough.doughType == title) ? classes : styles['b-link']}
                                             doughExtracost={doughExtracost}
-                                            >{title}</a>
+                                        >{title}</a>
                                     </Link>
                                 );
                             })}
@@ -71,7 +85,7 @@ const PizzaItem = ({ pizzaItem, updateCart }) => {
                                             onClick={setPizzaSize}
                                             className={(!size.pizzaSize && i == 0) ? classes : (size.pizzaSize == title) ? classes : styles['b-link']}
                                             sizeExtracost={sizeExtracost}
-                                            >{title}</a>
+                                        >{title}</a>
                                     </Link>
                                 );
                             })}
@@ -79,12 +93,10 @@ const PizzaItem = ({ pizzaItem, updateCart }) => {
                     </section>
                     <section className={styles['b-pizza-addtocart-wrapper']}>
                         <section className={styles['b-pizza-price-wrapper']}>
-                            <p className={styles['b-pizza-price']}>от&nbsp;{size.pizzaSizePrice || dough.pizzaDoughPrice ? resultPrice +size.pizzaSizePrice + dough.pizzaDoughPrice : pizzaItem.price}&nbsp;₽</p>
+                            <p className={styles['b-pizza-price']}>&nbsp;{pizzaPrice}&nbsp;₽</p>
                         </section>
                         <section className={styles['b-pizza-addtocart']}>
-                            <Link href={'#add-to-cart'}>
-                                {quantity.pizzaQuantity > 0 ? addToCart : addToCartInitial}
-                            </Link>
+                            <a href="#add-to-cart" onClick={() => { dispatch(addToCart(pizzaObject)); setPizzaQuantity() }} className={styles['b-link']}>Добавить{quantity > 0 ? <span className={styles['b-pizza-quantity']}>{quantity}</span> : ''}</a>
                         </section>
                     </section>
                 </article>

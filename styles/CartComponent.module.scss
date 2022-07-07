@@ -1,0 +1,35 @@
+.b-cart {
+    display: flex;
+    align-items: center;
+    color: #FFF;
+    padding: 15px 25px;
+    background: #FE5F1E;
+    border-radius: 30px;
+    margin-left: auto;
+
+    .b-link {
+        color: #FFF;
+        text-decoration: none;
+        font-weight: 700;
+        
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .b-price {
+
+    }
+    
+    .b-separator {
+        margin: 0 10px;
+    }
+
+    .b-items-total {
+
+        .b-link {
+            background: url("/cart_icon_small.png") no-repeat 0 0;
+            padding-left: 25px;
+        }
+    }
+}

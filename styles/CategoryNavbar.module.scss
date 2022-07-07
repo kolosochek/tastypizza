@@ -1,0 +1,33 @@
+.b-category-navbar {
+    .b-list {
+        display: flex;
+
+        .b-list-item {
+            margin-right: 10px;
+
+            .b-link {
+                display: block;
+                font-weight: 700;
+                color: #2c2c2c;
+                background: #F9F9F9;
+                padding: 15px 27px;
+                border-radius: 30px;
+                transition: all 300ms;
+
+                &:hover {
+                    background: #282828;
+                    color: #FFF;
+                }
+
+            }
+        }
+
+        .state__active {
+            .b-link {
+                background: #282828;
+                color: #FFF;
+            }
+        }
+    }
+}
+
