@@ -24,6 +24,7 @@ export default function Index() {
               src={'/category_empty.png'}
               width={180}
               height={125}
+              alt={'image for empty category'}
             />
           </section>
 
@@ -60,9 +61,10 @@ export default function Index() {
         <h1 className={styles['b-pizza-category-title']}>{category.length ? activeState.activeCategory + ' пиццы' : ''} </h1>
         <section className={styles['b-pizza-category']}>
           {category.length
-            ? category.map((item) => (
+            ? category.map((item, idx) => (
               <PizzaItem
                 pizzaItem={item}
+                key={idx}
               ></PizzaItem>
             ))
             : categoryIsEmpty}

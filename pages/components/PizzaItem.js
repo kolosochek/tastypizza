@@ -56,7 +56,9 @@ const PizzaItem = ({ pizzaItem }) => {
                         <Image
                             src={pizzaItem.image}
                             width={260}
-                            height={260} />
+                            height={260}
+                            alt={'pizza item image'} 
+                            />
                     </section>
                     <h3 className={styles['b-pizza-title']}>{pizzaItem.title}</h3>
                     <section className={styles['b-pizza-options']}>

@@ -39,6 +39,7 @@ const CartPage = () => {
                             src="/cart_empty_bg.png"
                             width={300}
                             height={255}
+                            alt={'empty cart image'}
                         />
                         <section className={styles['b-go-back-wrapper']}>
                             <Link href='/'>
@@ -71,6 +72,7 @@ const CartPage = () => {
                                         src={item.image}
                                         width={80}
                                         height={80}
+                                        alt={'pizza item thumbnail'}
                                     />
                                 </section>
                                 <section className={styles['b-title-wrapper']}>

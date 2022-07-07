@@ -23,7 +23,12 @@ const PageContainer = ({ pageTitle, pageContent, showCart, meta }) => {
                         <section className={styles['b-logo']}>
                             <Link href={"/"}>
                                 <a className={styles['b-link']}>
-                                    <Image src={'/header_logo.png'} width={38} height={38} />
+                                    <Image 
+                                    src={'/header_logo.png'} 
+                                    width={38} 
+                                    height={38} 
+                                    alt={'header logo icon'}
+                                    />
                                 </a>
                             </Link>
                         </section>
