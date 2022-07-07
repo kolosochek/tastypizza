@@ -9,5 +9,6 @@ module.exports = nextConfig
 module.exports = {
   images: {
     domains: ['dodopizza-a.akamaihd.net'],
+    optimizeFonts: false,
   },
 }
