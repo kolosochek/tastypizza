@@ -6,8 +6,6 @@ import { useState } from "react";
 import Image from "next/image";
 
 
-
-
 const PageContainer = ({ pageTitle, pageContent, showCart, meta }) => {
     const [cart, setCart] = useState({ itemsTotal: 0, priceTotal: 0 });
 
