@@ -1,69 +1,93 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, current } from '@reduxjs/toolkit'
 
+function getCartSummary({ items, summary }){
+    // debug
+    console.log('cartSummary', summary)
+    //
+    summary = { itemsTotal: 0, priceTotal: 0 }
+    if(items.length){
+      items.map((item) => {
+        summary.itemsTotal += item.quantity;
+        summary.priceTotal += item.quantity * item.price;
+      })
+    }
+    return {
+      itemsTotal: summary.itemsTotal,
+      priceTotal: summary.priceTotal,
+    }
+  }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    value: [],
+    items: [],
+    summary: {
+      itemsTotal: 0,
+      priceTotal: 0,
+    }
   },
   reducers: {
     addToCart: (state, action) => {
-      // something is alredy in the cart?
-      if (state.value.length) {
-        const isIncremented = false
-        state.value.map(function (item, idx) {
-          // same title && doughType && sizeType
-          if ((item.title === action.payload.title) && (item.doughType === action.payload.doughType) && (item.sizeType === action.payload.sizeType)) {
+      // something is already in the cart?
+      if (state.items.length) {
+        let isIncremented = false
+        state.items.map((item, idx) => {
+          // same title && product_options.dough.type && product_options.size.type
+          if ((item.title === action.payload.title)
+            && (item.product_options.dough.type === action.payload.product_options.dough.type)
+            && (item.product_options.size.type === action.payload.product_options.size.type)) {
             isIncremented = true
-            state.value[idx].pizzaQuantity = state.value[idx].pizzaQuantity == undefined ? 2 : state.value[idx].pizzaQuantity + 1;
+            state.items[idx].quantity += 1;
           }
         })
         if (!isIncremented) {
-          state.value.push(action.payload)
+          state.items.push(action.payload)
         }
-      // if cart is empty, let's add some items
+        // if cart is empty, add choosen product to the cart
       } else {
-        state.value.push(action.payload)
+        state.items.push(action.payload)
       }
+      // update cart info
+      state.summary = getCartSummary(state)
     },
     clearCart: (state) => {
-      state.value = []
+      state.items = []
+      // update cart info
+      state.summary = getCartSummary(state)
     },
+
     deleteCartItemById: (state, action) => {
-      state.value = state.value.filter((item, idx) =>
-        idx !== action.payload
-      )
+      state.items = state.items.filter((item, idx) => idx !== action.payload)
+      // update cart info
+      state.summary = getCartSummary(state)
     },
+
     incrementCartItemById: (state, action) => {
-      state.value.map(function (item, idx) {
+      state.items.map((item, idx) => {
         if (action.payload === idx) {
-          if (item.hasOwnProperty('pizzaQuantity')) {
-            state.value[idx].pizzaQuantity = parseInt(item.pizzaQuantity) + 1;
-          } else {
-            state.value[idx].pizzaQuantity = 2
-          }
+          state.items[idx].quantity = item.quantity + 1;
         }
       })
+      // update cart info
+      state.summary = getCartSummary(state)
     },
+
     decrementCartItemById: (state, action) => {
-      state.value.map(function (item, idx) {
+      state.items.map((item, idx) => {
         if (action.payload === idx) {
-          if (item.hasOwnProperty('pizzaQuantity')) {
-            if (parseInt(item.pizzaQuantity) == 1) {
-              state.value = state.value.filter((item, i) =>
-                i !== action.payload
-              )
-            } else {
-              state.value[idx].pizzaQuantity = parseInt(item.pizzaQuantity) - 1;
-            }
+          if (item.quantity === 1) {
+            // instead of decrementing item.quantity === 1 let's just delete this item 
+            state.items.splice(idx, 1)
           } else {
-            state.value = state.value.filter((item, i) =>
-              i !== action.payload
-            )
+            // otherwise decrement the item.quantity
+            state.items[idx].quantity = item.quantity - 1;
           }
         }
       })
+      // update cart info
+      state.summary = getCartSummary(state)
     },
+
   },
 })
 

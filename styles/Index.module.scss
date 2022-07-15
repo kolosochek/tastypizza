@@ -17,24 +17,3 @@
     }
 }
 
-.b-category-empty-wrapper {
-    flex-grow: 1;
-
-    .b-category-empty {
-        text-align: center;
-
-        .b-category-empty-title {
-            margin: 20px 0;
-        }
-
-        .b-plaintext {
-            color: #777777;
-            font-size: 18px;
-            line-height: 26px;
-        }
-
-        .b-image-wrapper {
-            margin: 50px 0 70px;
-        }
-    }
-}

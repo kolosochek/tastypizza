@@ -1,22 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const capitalize_string = str => str.length ? str.charAt(0).toUpperCase() + str.slice(1) : false
+
+
 export const activeStateSlice = createSlice({
     name: 'activeState',
     initialState: {
-        value: {
-            activeCategory: 'Все',
-            activeFilter: 'популярности'
-        },
+        activeCategory: 'Все',
+        activeFilter: 'популярности'
     },
     reducers: {
         setActiveCategory: (state, action) => {
-            if (typeof (action.payload) === 'string' && action.payload.length) {
-                state.value.activeCategory = action.payload.charAt(0).toUpperCase() + action.payload.slice(1)
+            if (action.payload.length) {
+                state.activeCategory = capitalize_string(action.payload)
             }
         },
         setActiveFilter: (state, action) => {
-            if (typeof (action.payload) === 'string' && action.payload.length) {
-                state.value.activeFilter = action.payload
+            if (action.payload.length) {
+                state.activeFilter = action.payload
             }
         },
     },

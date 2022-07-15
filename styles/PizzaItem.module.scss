@@ -42,10 +42,11 @@
                 display: flex;
                 margin-bottom: 7px;
 
-                &>a {
+                &>button {
                     display: inline-block;
                     width: 130px;
                     font-size: 14px;
+                    font-weight: 700;
                     height: 32px;
                     border-radius: 5px;
                     line-height: 32px;
@@ -73,10 +74,11 @@
             .b-pizza-size {
                 display: flex;
 
-                &>a {
+                &>button {
                     display: inline-block;
                     width: 86px;
                     font-size: 14px;
+                    font-weight: 700;
                     height: 32px;
                     border-radius: 5px;
                     line-height: 32px;

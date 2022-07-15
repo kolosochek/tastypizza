@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "../../styles/CategoryNavbar.module.scss"
-import { useState } from "react";
+import { memo, useState } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getItemsByCategory, sortCategoryByFilter } from "../../redux/categorySlice";
@@ -12,7 +12,7 @@ import { setActiveCategory } from "../../redux/activeStateSlice";
 const CategoryNavbar = ({ categoryItems }) => {
     const [category, setCategory] = useState({ activeItem: false});
     // redux
-    const activeState = useSelector((state) => state.activeState.value)
+    const activeState = useSelector((state) => state.activeState);
     const dispatch = useDispatch();
 
     function setCategoryNavbar(e) {
@@ -28,14 +28,15 @@ const CategoryNavbar = ({ categoryItems }) => {
 
     return (
         <>
-            <navbar id="categoryNavbar" className={styles['b-category-navbar']}>
+            <nav id="categoryNavbar" className={styles['b-category-navbar']}>
                 <ul className={styles['b-list']}>
                     {categoryItems?.map(function (item, idx) {
                         const [href, title] = item;
+                        const stateActive = styles['b-list-item'] + ' ' + styles['state__active'];
                         return (
                             <li key={href} className={
-                                activeState?.activeCategory && activeState?.activeCategory.toLowerCase() == title.toLowerCase() ? 
-                                    styles['b-list-item'] + ' ' + styles['state__active']  
+                                activeState?.activeCategory && activeState?.activeCategory.toLowerCase() == title.toLowerCase()
+                                ? stateActive     
                                 : styles['b-list-item']
                                 }>
                                 <Link href={href}>
@@ -46,9 +47,9 @@ const CategoryNavbar = ({ categoryItems }) => {
                         );
                     })}
                 </ul>
-            </navbar>
+            </nav>
         </>
     );
 }
 
-export default CategoryNavbar;
+export default memo(CategoryNavbar);

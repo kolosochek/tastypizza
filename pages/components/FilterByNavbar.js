@@ -4,12 +4,12 @@ import styles from "../../styles/FilterByNavbar.module.scss"
 import { setActiveFilter } from "../../redux/activeStateSlice";
 import { sortCategoryByFilter } from "../../redux/categorySlice";
 
-const FilterBy = ({ filterItems }) => {
+const FilterBy = ({ categoryFilter }) => {
     const [div, setDiv] = useState({ isHidden: true, activeItem: false })
     const [link, setLink] = useState();
     const style = { visibility: div.isHidden ? 'hidden' : 'visible' };
     // redux
-    const activeState = useSelector((state) => state.activeState.value)
+    const activeState = useSelector((state) => state.activeState)
     const dispatch = useDispatch();
 
     function toggleDiv(e) {
@@ -46,7 +46,7 @@ const FilterBy = ({ filterItems }) => {
                 <section id="filterBy" style={style}
                     className={styles['b-list-wrapper']}>
                     <ul className={styles['b-list']}>
-                        {filterItems?.map(function (item, i) {
+                        {categoryFilter?.map(function (item, i) {
                             const [href, title] = item;
                             return (
                                 <li key={href} className={title.toLowerCase() == activeState.activeFilter ? styles['b-list-item'] + ' ' + styles['state__active'] : styles['b-list-item']}>

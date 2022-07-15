@@ -1,106 +1,94 @@
-import Link from "next/link";
 import Image from "next/image";
 import styles from "../../styles/PizzaItem.module.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 
+// pizzaOptions params
+const doughTypeArr =
+    [
+        { type: 'тонкое', price: 0 },
+        { type: 'традиционное', price: 140 }
+    ]
+const pizzaSizeArr =
+    [
+        { type: 26, price: 0 },
+        { type: 32, price: 180 },
+        { type: 40, price: 290 },
+    ]
+
 const PizzaItem = ({ pizzaItem }) => {
-    // pizzaOptions params
-    const doughTypeArr = [
-        ['#dough-type-thin', 'тонкое', 0],
-        ['#dough-type-traditional', 'традиционное', 100],
-    ]
-    const pizzaSizeArr = [
-        ['#size-26', '26 см', 0],
-        ['#size-32', '32 см', 250],
-        ['#size-40', '40 см', 500],
-    ]
+
     // redux
-    const cart = useSelector((state) => state.cart.value);
     const dispatch = useDispatch();
     // react hooks
-    const [dough, setDough] = useState({ doughType: doughTypeArr[0][1], pizzaDoughPrice: 0 });
-    const [size, setSize] = useState({ pizzaSize: pizzaSizeArr[0][1], pizzaSizePrice: 0 });
+    const [dough, setDough] = useState({ type: doughTypeArr[0].type, price: doughTypeArr[0].price });
+    const [size, setSize] = useState({ type: pizzaSizeArr[0].type, price: pizzaSizeArr[0].price });
     const [quantity, setQuantity] = useState(0);
-    // create page vars
-    const pizzaPrice = parseInt(size.pizzaSizePrice || dough.pizzaDoughPrice ? parseInt(pizzaItem?.price) + size.pizzaSizePrice + dough.pizzaDoughPrice : pizzaItem?.price)
+    // construct object which we'll pass to the cart
+    const price = pizzaItem.price + size.price + dough.price
     const pizzaObject = {
-        'image': pizzaItem?.image,
-        'title': pizzaItem?.title,
-        'doughType': dough?.doughType,
-        'sizeType': size?.pizzaSize,
-        'pizzaPrice': pizzaPrice,
-    }
-    // custom functions
-    function setDoughType(e) {
-        e.preventDefault();
-        setDough({ doughType: e.target.text, pizzaDoughPrice: parseInt(e.target.attributes.doughExtracost.value) });
-    }
-
-    function setPizzaSize(e) {
-        e.preventDefault();
-        setSize({ pizzaSize: e.target.text, pizzaSizePrice: parseInt(e.target.attributes.sizeExtracost.value) });
-    }
-
-    function setPizzaQuantity() {
-        event.preventDefault();
-        setQuantity(parseInt(quantity) + 1);
+        image: pizzaItem?.image,
+        title: pizzaItem?.title,
+        product_options: {
+            dough: {
+                type: dough.type,
+                price: dough.price,
+            },
+            size: {
+                type: size.type,
+                price: size.price,
+            },
+        },
+        price: price,
+        quantity: 1,
     }
 
     return (
         <>
             <section className={styles['b-pizza-wrapper']}>
                 <article className={styles['b-pizza']}>
-                    <section className={styles['b-pizza-image-wrapper']}>
+                    <figure className={styles['b-pizza-image-wrapper']}>
                         <Image
                             src={pizzaItem?.image}
                             width={260}
                             height={260}
-                            alt={'pizza item image'} 
-                            />
-                    </section>
+                            alt={'pizza item image'}
+                        />
+                    </figure>
                     <h3 className={styles['b-pizza-title']}>{pizzaItem?.title}</h3>
-                    <section className={styles['b-pizza-options']}>
-                        <section className={styles['b-dough-type']}>
-                            {doughTypeArr?.map(function (item, i) {
-                                const [href, title, doughExtracost] = item;
-                                const classes = styles['b-link'] + ' ' + styles['state__active'];
+                    <div className={styles['b-pizza-options']}>
+                        <div className={styles['b-dough-type']}>
+                            {doughTypeArr?.map((item, idx) => {
+                                const stateActive = styles['b-link'] + ' ' + styles['state__active'];
                                 return (
-                                    <Link key={href} href={href}>
-                                        <a
-                                            onClick={setDoughType}
-                                            className={(!dough.doughType && i == 0) ? classes : (dough.doughType == title) ? classes : styles['b-link']}
-                                            doughExtracost={doughExtracost}
-                                        >{title}</a>
-                                    </Link>
+                                    <button
+                                        onClick={() => setDough({type:item.type, price:item.price})}
+                                        className={dough.type === item.type ? stateActive : styles['b-link']}
+                                    >{item.type}</button>
                                 );
                             })}
-                        </section>
-                        <section className={styles['b-pizza-size']}>
-                            {pizzaSizeArr?.map(function (item, i) {
-                                const [href, title, sizeExtracost = 0] = item;
-                                const classes = styles['b-link'] + ' ' + styles['state__active'];
+                        </div>
+                        <div className={styles['b-pizza-size']}>
+                            {pizzaSizeArr?.map((item, idx) => {
+                                const stateActive = styles['b-link'] + ' ' + styles['state__active'];
                                 return (
-                                    <Link key={href} href={href}>
-                                        <a
-                                            onClick={setPizzaSize}
-                                            className={(!size.pizzaSize && i == 0) ? classes : (size.pizzaSize == title) ? classes : styles['b-link']}
-                                            sizeExtracost={sizeExtracost}
-                                        >{title}</a>
-                                    </Link>
+                                    <button
+                                        onClick={() => setSize({type:item.type, price:item.price})}
+                                        className={size.type === item.type ? stateActive : styles['b-link']}
+                                    >{item.type} см</button>
                                 );
                             })}
-                        </section>
-                    </section>
-                    <section className={styles['b-pizza-addtocart-wrapper']}>
-                        <section className={styles['b-pizza-price-wrapper']}>
-                            <p className={styles['b-pizza-price']}>&nbsp;{pizzaPrice}&nbsp;₽</p>
-                        </section>
-                        <section className={styles['b-pizza-addtocart']}>
-                            <a href="#add-to-cart" onClick={() => { dispatch(addToCart(pizzaObject)); setPizzaQuantity() }} className={styles['b-link']}>Добавить{quantity > 0 ? <span className={styles['b-pizza-quantity']}>{quantity}</span> : ''}</a>
-                        </section>
-                    </section>
+                        </div>
+                    </div>
+                    <div className={styles['b-pizza-addtocart-wrapper']}>
+                        <div className={styles['b-pizza-price-wrapper']}>
+                            <p className={styles['b-pizza-price']}> {price} ₽</p>
+                        </div>
+                        <div className={styles['b-pizza-addtocart']}>
+                            <button onClick={() => { dispatch(addToCart(pizzaObject)); setQuantity(quantity + 1) }} className={styles['b-link']}>Добавить{quantity > 0 ? <span className={styles['b-pizza-quantity']}>{quantity}</span> : ''}</button>
+                        </div>
+                    </div>
                 </article>
             </section>
         </>

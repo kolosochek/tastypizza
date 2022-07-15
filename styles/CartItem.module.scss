@@ -1,42 +1,3 @@
-.b-cart-empty-wrapper {
-    margin-bottom: 90px;
-
-    .b-cart {
-        text-align: center;
-
-        .b-cart-title {}
-
-        .b-cart-empty {
-
-            .b-plaintext-wrapper {
-                margin: 10px 0 50px;
-
-                .b-plaintext {
-                    color: #777777;
-                    font-size: 18px;
-                    line-height: 26px;
-                }
-            }
-
-            .b-image {}
-
-            .b-go-back-wrapper {
-                margin: 75px 0 0;
-
-                .b-go-back {
-                    display: inline-block;
-                    font-weight: 700;
-                    background: #282828;
-                    color: #FFFFFF;
-                    padding: 15px 27px;
-                    border-radius: 30px;
-                    transition: all 300ms;
-                }
-            }
-        }
-    }
-}
-
 .b-cart-wrapper {
     display: flex;
     justify-content: center;
@@ -100,7 +61,7 @@
                 .b-quantity-wrapper {
                     margin-right: 90px;
 
-                    &>a {
+                    &>button {
                         cursor: pointer;
                         border: 2px solid #FE5F1E;
                         border-radius: 30px;
@@ -139,69 +100,6 @@
                         padding: 5px 10px;
                     }
                 }
-            }
-        }
-
-        .b-cart-summary-wrapper {
-            margin-bottom: 40px;
-
-            .b-cart-summary {
-                display: flex;
-
-                .b-cart-quantity {
-                    .b-plaintext {
-                        &>span {
-                            font-weight: 700;
-                            font-size: 22px;
-                        }
-                    }
-                }
-
-                .b-cart-price {
-                    margin-left: auto;
-
-                    .b-plaintext {
-                        &>span {
-                            color: #FE5F1E;
-                            font-size: 22px;
-                        }
-                    }
-                }
-
-                & p{
-                    font-size: 22px;
-                }
-            }
-        }
-
-        .b-cart-navigation {
-            display: flex;
-
-            &>a {
-                display: inline-block;
-                font-size: 16px;
-            }
-
-            .b-cart-navigation-goback {
-                border: 2px solid #D3D3D3;
-                border-radius: 30px;
-                padding: 20px 50px;
-                color: #CACACA;
-
-                &:hover {
-                    background: #FE5F1E; 
-                    color: #FFFFFF; 
-                    border: 2px solid #FE5F1E;   
-                }
-            }
-            
-            .b-cart-navigation-order {
-                margin-left: auto;
-                color: #FFFFFF;
-                font-weight: 700;
-                background: #FE5F1E;
-                border-radius: 30px;
-                padding: 20px 50px;
             }
         }
     }
