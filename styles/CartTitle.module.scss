@@ -1,0 +1,17 @@
+.b-cart-title-wrapper {
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+
+    .b-cart-title {
+        padding-left: 40px;
+        background: url("/cart_icon.png") no-repeat 0 0;
+    }
+    .b-clear-cart-button {
+        cursor: pointer;
+        margin-left: auto;
+        padding: 2px 0 2px 23px;
+        background: url("/clear_cart_icon.png") no-repeat 0 0;
+        color: #B6B6B6;
+    }
+}

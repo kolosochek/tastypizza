@@ -3,6 +3,7 @@ import Image from "next/image";
 import { clearCart, deleteCartItemById, incrementCartItemById, decrementCartItemById } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import CartSummary from "./CartSummary";
+import CartTitle from "./CartTitle";
 
 const CartItem = () => {
     const dispatch = useDispatch();
@@ -14,13 +15,7 @@ const CartItem = () => {
         <>
             <div className={styles['b-cart-wrapper']}>
                 <section className={styles['b-cart']}>
-                    <div className={styles['b-cart-title-wrapper']}>
-                        <h1 className={styles['b-cart-title']}>Корзина</h1>
-                        <button
-                            className={styles['b-clear-cart-button']}
-                            onClick={() => dispatch(clearCart())}
-                        >Очистить корзину</button>
-                    </div>
+                    <CartTitle />
                     {cart?.map((item, idx) => (
                         <div key={idx} className={styles['b-cart-item-wrapper']}>
                             <section className={styles['b-cart-item']}>

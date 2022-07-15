@@ -1,10 +1,12 @@
 .b-page-container-wrapper {
-    background: #FFF;
-    margin: 43px 45px;
-    border-radius: 10px;
+    background: #FFDF8C;
     flex-grow: 1;
 
-    .b-page-container {}
+    .b-page-container {
+        background: #FFFFFF;
+        margin: 43px 45px;    
+        border-radius: 10px;
+    }
 
 }
 
@@ -17,7 +19,8 @@
 
     .b-header {
         display: flex;
-        margin: 50px 67px 0px;
+        margin: 0px 67px 0px;
+        padding-top: 50px;
     }
 }
 
