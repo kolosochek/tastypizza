@@ -65,6 +65,7 @@ const PizzaItem = ({ pizzaItem }) => {
                                     <button
                                         onClick={() => setDough({type:item.type, price:item.price})}
                                         className={dough.type === item.type ? stateActive : styles['b-link']}
+                                        key={item.type}
                                     >{item.type}</button>
                                 );
                             })}
@@ -76,6 +77,7 @@ const PizzaItem = ({ pizzaItem }) => {
                                     <button
                                         onClick={() => setSize({type:item.type, price:item.price})}
                                         className={size.type === item.type ? stateActive : styles['b-link']}
+                                        key={item.type}
                                     >{item.type} см</button>
                                 );
                             })}

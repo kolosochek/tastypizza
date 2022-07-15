@@ -27,7 +27,7 @@ export default function Index() {
   ]
 
   
-  const pageContent =
+  const children =
     <>
       <div className={styles['b-filter-wrapper']}>
         <CategoryNavbar
@@ -58,9 +58,8 @@ export default function Index() {
     <>
       <PageContainer
         pageTitle={"Вкусная пицца в Краснодаре!"}
-        showCart={ true }
-        children={ pageContent }
-      ></PageContainer>
+        showCart={true}
+      >{children}</PageContainer>
     </>
   )
 }

@@ -13,12 +13,12 @@ const CartPage = () => {
         <> 
             <PageContainer
                 pageTitle={"Оформить заказ"}
-                showCart={false}
-                children={cart?.length 
+                showCart={false}                
+            >{cart?.length 
                     ? <CartItem />
                     : <CartEmpty />
-                }
-            ></PageContainer>
+            }
+            </PageContainer>
         </>
     );
 }
