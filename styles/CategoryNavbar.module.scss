@@ -1,3 +1,5 @@
+$box-shadow: 3px 3px 5px rgb(229 220 220 / 75%);
+
 .b-category-navbar {
     .b-list {
         display: flex;
@@ -10,6 +12,7 @@
                 font-weight: 700;
                 color: #2c2c2c;
                 background: #F9F9F9;
+                box-shadow: $box-shadow;
                 padding: 15px 27px;
                 border-radius: 30px;
                 transition: all 300ms;

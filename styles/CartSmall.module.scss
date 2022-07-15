@@ -1,9 +1,12 @@
+$box-shadow: 3px 3px 5px rgb(229 220 220 / 75%);
+
 .b-cart {
     display: flex;
     align-items: center;
     color: #FFF;
     padding: 15px 25px;
     background: #FE5F1E;
+    box-shadow: $box-shadow;
     border-radius: 30px;
     margin-left: auto;
 
@@ -11,6 +14,7 @@
         color: #FFF;
         text-decoration: none;
         font-weight: 700;
+        box-shadow: none;
         
         &:hover {
             text-decoration: none;
