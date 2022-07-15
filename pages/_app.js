@@ -6,9 +6,11 @@ import '../styles/globals.scss'
 import '../styles/fonts.css'
 
 function App({ Component, pageProps }) {
-  return <Provider store={store}>
+  return (
+    <Provider store={store}>
       <Component {...pageProps} />
     </Provider>
+  )
 }
 
 export default App

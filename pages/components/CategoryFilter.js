@@ -6,7 +6,7 @@ import { sortCategoryByFilter } from "../../redux/categorySlice";
 
 const CategoryFilter = ({ categoryFilter }) => {
     const [div, setDiv] = useState({ isHidden: true })
-    const [filter, setFilter] = useState({ activeFilter: categoryFilter[0]});
+    const [filter, setFilter] = useState({ activeFilter: categoryFilter?.[0]});
     const style = { visibility: div.isHidden ? 'hidden' : 'visible' };
     // redux
     const activeState = useSelector((state) => state.activeState)

@@ -1,9 +1,6 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 
 function getCartSummary({ items, summary }){
-    // debug
-    console.log('cartSummary', summary)
-    //
     summary = { itemsTotal: 0, priceTotal: 0 }
     if(items.length){
       items.map((item) => {
