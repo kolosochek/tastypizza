@@ -4,7 +4,7 @@ import styles from "../../styles/CategoryFilter.module.scss"
 import { setActiveFilter } from "../../redux/activeStateSlice";
 import { sortCategoryByFilter } from "../../redux/categorySlice";
 
-const FilterBy = ({ categoryFilter }) => {
+const CategoryFilter = ({ categoryFilter }) => {
     const [div, setDiv] = useState({ isHidden: true, activeItem: false })
     const [link, setLink] = useState();
     const style = { visibility: div.isHidden ? 'hidden' : 'visible' };
@@ -63,4 +63,4 @@ const FilterBy = ({ categoryFilter }) => {
 }
 
 
-export default FilterBy;
+export default CategoryFilter;
