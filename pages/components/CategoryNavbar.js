@@ -10,39 +10,32 @@ import { setActiveCategory } from "../../redux/activeStateSlice";
 
 
 const CategoryNavbar = ({ categoryItems }) => {
-    const [category, setCategory] = useState({ activeItem: false});
+    const [category, setCategory] = useState({ activeCategory: categoryItems?.[0] });
     // redux
     const activeState = useSelector((state) => state.activeState);
     const dispatch = useDispatch();
 
-    function setCategoryNavbar(e) {
-        if(e && e.target.text){
-            e.preventDefault();
-            let text = e.target.text.toLowerCase()
-            setCategory({ activeItem: text });
-            dispatch(setActiveCategory(text))
-            dispatch(getItemsByCategory(text))
-            dispatch(sortCategoryByFilter(activeState?.activeFilter))
-        }
+    function setCategoryNavbar(obj) {
+        setCategory({ activeCategory: obj.activeCategory });
+        dispatch(setActiveCategory(obj.activeCategory.toLowerCase()))
+        dispatch(getItemsByCategory(obj.activeCategory.toLowerCase()))
+        dispatch(sortCategoryByFilter(activeState?.activeFilter))
     }
 
     return (
         <>
             <nav id="categoryNavbar" className={styles['b-category-navbar']}>
                 <ul className={styles['b-list']}>
-                    {categoryItems?.map(function (item, idx) {
-                        const [href, title] = item;
+                    {categoryItems?.map((item, idx) => {
                         const stateActive = styles['b-list-item'] + ' ' + styles['state__active'];
                         return (
-                            <li key={href} className={
-                                activeState?.activeCategory && activeState?.activeCategory.toLowerCase() == title.toLowerCase()
-                                ? stateActive     
-                                : styles['b-list-item']
-                                }>
-                                <Link href={href}>
-                                    <a onClick={setCategoryNavbar} 
-                                    className={styles['b-link']}>{title}</a>
-                                </Link>
+                            <li key={idx} className={
+                                category.activeCategory === item
+                                    ? stateActive
+                                    : styles['b-list-item']
+                            }>
+                                <button onClick={() => setCategoryNavbar({ activeCategory: item })}
+                                    className={styles['b-link']}>{item}</button>
                             </li>
                         );
                     })}

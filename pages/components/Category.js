@@ -5,19 +5,8 @@ import CategoryEmpty from '../components/CategoryEmpty';
 import { useSelector } from "react-redux";
 import styles from '../../styles/Category.module.scss'
 
-const categoryItems = [
-    ['#category-all', 'Все'],
-    ['#category-meat', 'Мясные'],
-    ['#category-vegeterian', 'Вегетарианские'],
-    ['#category-grill', 'Гриль'],
-    ['#category-spicy', 'Острые'],
-    ['#category-calzone', 'Закрытые'],
-]
-const categoryFilterItems = [
-    ['#filter-popularity', 'популярности'],
-    ['#filter-price', 'цене'],
-    ['#filter-alphabet', 'алфавиту'],
-]
+const categoryNavbarItems = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые']
+const categoryFilterItems = ['популярности', 'цене', 'алфавиту']
 
 const Category = ({ showFilters }) => {
     // redux
@@ -28,7 +17,7 @@ const Category = ({ showFilters }) => {
         <>
             <div className={styles['b-filter-wrapper']}>
                 <CategoryNavbar
-                    categoryItems={categoryItems}
+                    categoryItems={categoryNavbarItems}
                 ></CategoryNavbar>
                 <CategoryFilter
                     categoryFilter={categoryFilterItems}
