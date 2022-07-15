@@ -9,7 +9,7 @@ export const categorySlice = createSlice({
         getItemsByCategory: (state, action) => {
             let newArr = []
             if (action.payload !== 'все') {
-                pizzas.map(function(item) {
+                pizzas.map((item) => {
                     item.category.map((category) => {
                         if (category == action.payload) {
                             newArr.push(item);
