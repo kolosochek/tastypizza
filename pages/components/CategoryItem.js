@@ -17,7 +17,7 @@ const pizzaSizeArr =
         { type: 40, price: 290 },
     ]
 
-const PizzaItem = ({ pizzaItem }) => {
+const CategoryItem = ({ categoryItem }) => {
 
     // redux
     const dispatch = useDispatch();
@@ -26,10 +26,10 @@ const PizzaItem = ({ pizzaItem }) => {
     const [size, setSize] = useState({ type: pizzaSizeArr[0].type, price: pizzaSizeArr[0].price });
     const [quantity, setQuantity] = useState(0);
     // construct object which we'll pass to the cart
-    const price = pizzaItem?.price + size.price + dough.price
+    const price = categoryItem?.price + size.price + dough.price
     const pizzaObject = {
-        image: pizzaItem?.image,
-        title: pizzaItem?.title,
+        image: categoryItem?.image,
+        title: categoryItem?.title,
         product_options: {
             dough: {
                 type: dough.type,
@@ -50,13 +50,13 @@ const PizzaItem = ({ pizzaItem }) => {
                 <article className={styles['b-pizza']}>
                     <figure className={styles['b-pizza-image-wrapper']}>
                         <Image
-                            src={pizzaItem?.image}
+                            src={categoryItem?.image}
                             width={260}
                             height={260}
                             alt={'pizza item image'}
                         />
                     </figure>
-                    <h3 className={styles['b-pizza-title']}>{pizzaItem?.title}</h3>
+                    <h3 className={styles['b-pizza-title']}>{categoryItem?.title}</h3>
                     <div className={styles['b-pizza-options']}>
                         <div className={styles['b-dough-type']}>
                             {doughTypeArr?.map((item, idx) => {
@@ -98,4 +98,4 @@ const PizzaItem = ({ pizzaItem }) => {
 }
 
 
-export default PizzaItem;
+export default CategoryItem;

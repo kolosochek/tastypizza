@@ -1,6 +1,6 @@
 import CategoryNavbar from "../components/CategoryNavbar";
 import CategoryFilter from "../components/CategoryFilter"
-import PizzaItem from "../components/PizzaItem";
+import CategoryItem from "../components/CategoryItem";
 import CategoryEmpty from '../components/CategoryEmpty';
 import { useSelector } from "react-redux";
 import styles from '../../styles/Category.module.scss'
@@ -28,10 +28,10 @@ const Category = ({ showFilters }) => {
                 <section className={styles['b-pizza-category']}>
                     {category.length
                         ? category.map((item, idx) => (
-                            <PizzaItem
-                                pizzaItem={item}
+                            <CategoryItem
+                                categoryItem={item}
                                 key={idx}
-                            ></PizzaItem>
+                            ></CategoryItem>
                         ))
                         : <CategoryEmpty />
                     }

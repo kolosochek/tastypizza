@@ -126,21 +126,21 @@
                     display: inline-block;
                     font-weight: 700;
                     font-size: 16px;
-                    background: url(/add_to_cart_cross.png) 16px 13px no-repeat #FFFFFF;
+                    background: url(/add_to_cart_cross.png) 16px 15px no-repeat #FFFFFF;
                     border: 1px solid #EB5A1E;
                     border-radius: 30px;
                     padding: 11px 12px 14px 35px;
                     color: #EB5A1E;
 
                     &:hover {
-                        background: url(/add_to_cart_cross.png) 16px -55px no-repeat #EB5A1E;
+                        background: url(/add_to_cart_cross.png) 16px -53px no-repeat #EB5A1E;
                         color: #FFFFFF;
                     }
 
                     .b-pizza-quantity {
                         background: #EB5A1E;
                         border-radius: 50px;
-                        padding: 5px 10px;
+                        padding: 5px 12px 5px 11px;
                         color: #FFFFFF;
                         margin-left: 5px;
                     }
