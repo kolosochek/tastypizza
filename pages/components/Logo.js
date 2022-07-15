@@ -7,7 +7,7 @@ import styles from "../../styles/Logo.module.scss"
 const Logo = () => {
     return (
         <>
-            <div className={styles['b-logo']}>
+            <figure className={styles['b-logo']}>
                 <Link href={"/"}>
                     <Image
                         src={'/header_logo.png'}
@@ -16,8 +16,7 @@ const Logo = () => {
                         alt={'header logo icon'}
                     />
                 </Link>
-
-            </div>
+            </figure>
             <div className={styles['b-header-title-wrapper']}>
                 <h2 className={styles['b-header-title']}>Краснодар Пицца</h2>
                 <p className={styles['b-plain-text']}>аппетитная пицца из дровяной печи</p>

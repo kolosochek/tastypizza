@@ -13,7 +13,7 @@ const PageContainer = ({ pageTitle, children, showCart }) => {
                 <title>{pageTitle}</title>
             </Head>
             <div className={styles['b-page-container-wrapper']}>
-                <div className={styles['b-page-container']}>
+                <div className={styles['b-page-container']}> 
                     <section className={styles['b-header-container']}>
                         <header className={styles['b-header']}>
                             <Logo />

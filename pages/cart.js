@@ -10,7 +10,7 @@ const CartPage = () => {
     const cart = useSelector((state) => state.cart.items)
     
     return (
-        <>
+        <> 
             <PageContainer
                 pageTitle={"Оформить заказ"}
                 showCart={false}
