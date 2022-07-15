@@ -26,7 +26,7 @@ const PizzaItem = ({ pizzaItem }) => {
     const [size, setSize] = useState({ type: pizzaSizeArr[0].type, price: pizzaSizeArr[0].price });
     const [quantity, setQuantity] = useState(0);
     // construct object which we'll pass to the cart
-    const price = pizzaItem.price + size.price + dough.price
+    const price = pizzaItem?.price + size.price + dough.price
     const pizzaObject = {
         image: pizzaItem?.image,
         title: pizzaItem?.title,

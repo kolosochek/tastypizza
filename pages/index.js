@@ -1,7 +1,7 @@
 import styles from '../styles/Index.module.scss'
 import PageContainer from './components/PageContainer'
 import CategoryNavbar from "./components/CategoryNavbar";
-import FilterByNavbar from "./components/FilterByNavbar"
+import CategoryFilter from "./components/CategoryFilter"
 import PizzaItem from "./components/PizzaItem";
 import CategoryEmpty from './components/CategoryEmpty';
 // redux
@@ -33,9 +33,9 @@ export default function Index() {
         <CategoryNavbar
           categoryItems={categoryItems}
         ></CategoryNavbar>
-        <FilterByNavbar
+        <CategoryFilter
           categoryFilter={categoryFilterItems}
-        ></FilterByNavbar>
+        ></CategoryFilter>
       </div>
       <div className={styles['b-pizza-category-wrapper']}>
         <h1 className={styles['b-pizza-category-title']}>{category.length ? activeState.activeCategory + ' пиццы' : ''} </h1>

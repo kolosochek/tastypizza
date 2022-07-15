@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../../styles/FilterByNavbar.module.scss"
+import styles from "../../styles/CategoryFilter.module.scss"
 import { setActiveFilter } from "../../redux/activeStateSlice";
 import { sortCategoryByFilter } from "../../redux/categorySlice";
 
