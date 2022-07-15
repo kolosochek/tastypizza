@@ -1,0 +1,33 @@
+.b-cart-navigation {
+    display: flex;
+
+    &>a {
+        display: inline-block;
+        font-size: 16px;
+    }
+
+    .b-cart-navigation-goback {
+        background: #FE5F1E; 
+        color: #FFFFFF; 
+        border: 2px solid #FE5F1E; 
+        
+        border-radius: 30px;
+        padding: 20px 50px;
+        
+
+        &:hover {
+            border: 2px solid #D3D3D3; 
+            color: #CACACA;
+            background: #FFFFFF;
+        }
+    }
+    
+    .b-cart-navigation-order {
+        margin-left: auto;
+        color: #FFFFFF;
+        font-weight: 700;
+        background: #FE5F1E;
+        border-radius: 30px;
+        padding: 20px 50px;
+    }
+}

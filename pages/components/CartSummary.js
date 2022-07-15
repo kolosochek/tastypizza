@@ -14,14 +14,6 @@ const CartSummary = ({ itemsTotal, priceTotal }) => {
                     </section>
                 </section>
             </div>
-            <section className={styles['b-cart-navigation']}>
-                <Link href={"/"}>
-                    <button className={styles['b-cart-navigation-goback']}>&lt;    Вернуться назад</button>
-                </Link>
-                <Link href={"/order"}>
-                    <button className={styles['b-cart-navigation-order']}>Оформить заказ</button>
-                </Link>
-            </section>
         </>
     );
 };
