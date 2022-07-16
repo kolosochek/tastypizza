@@ -5,20 +5,21 @@ import { setActiveFilter } from "../../redux/activeStateSlice";
 import { sortCategoryByFilter } from "../../redux/categorySlice";
 
 const CategoryFilter = ({ categoryFilter }) => {
-    const [div, setDiv] = useState({ isHidden: true })
-    const [filter, setFilter] = useState({ activeFilter: categoryFilter?.[0]});
-    const style = { visibility: div.isHidden ? 'hidden' : 'visible' };
     // redux
     const activeState = useSelector((state) => state.activeState)
     const dispatch = useDispatch();
+    const [div, setDiv] = useState({ isHidden: true })
+    const [filter, setFilter] = useState({ activeFilter: activeState?.activeFilter });
+    const style = { visibility: div.isHidden ? 'hidden' : 'visible' };
+
 
     function toggleDiv() {
         setDiv({ isHidden: !div.isHidden });
     }
 
     function setCategoryFilter(obj) {
-        setFilter({ activeFilter: obj.activeFilter});
-        setDiv({ isHidden: !div.isHidden });   
+        setFilter({ activeFilter: obj.activeFilter });
+        setDiv({ isHidden: !div.isHidden });
         dispatch(setActiveFilter(obj.activeFilter))
         dispatch(sortCategoryByFilter(obj.activeFilter))
 
@@ -43,7 +44,7 @@ const CategoryFilter = ({ categoryFilter }) => {
                     <ul className={styles['b-list']}>
                         {categoryFilter?.map((item, idx) => {
                             return (
-                                <li key={idx} 
+                                <li key={idx}
                                     className={filter.activeFilter === item ? styles['b-list-item'] + ' ' + styles['state__active'] : styles['b-list-item']}>
                                     <a onClick={() => setCategoryFilter({ activeFilter: item })}
                                         className={styles['b-link']}>{item}</a>

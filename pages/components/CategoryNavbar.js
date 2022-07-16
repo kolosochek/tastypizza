@@ -1,4 +1,3 @@
-import Link from "next/link";
 import styles from "../../styles/CategoryNavbar.module.scss"
 import { memo, useState } from "react";
 // redux
@@ -10,10 +9,11 @@ import { setActiveCategory } from "../../redux/activeStateSlice";
 
 
 const CategoryNavbar = ({ categoryItems }) => {
-    const [category, setCategory] = useState({ activeCategory: categoryItems?.[0] });
     // redux
     const activeState = useSelector((state) => state.activeState);
     const dispatch = useDispatch();
+    const [category, setCategory] = useState({ activeCategory: activeState?.activeCategory });
+    
 
     function setCategoryNavbar(obj) {
         setCategory({ activeCategory: obj.activeCategory });
