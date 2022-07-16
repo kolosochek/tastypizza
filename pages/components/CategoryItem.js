@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../../styles/PizzaItem.module.scss";
+import styles from "../../styles/CategoryItem.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
