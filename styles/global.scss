@@ -1,0 +1,63 @@
+$box-shadow: 3px 3px 5px rgb(229 220 220 / 75%);
+
+
+
+/* Custom CSS */
+
+body {
+
+}
+
+p, span, a, h1, h2, h3, h4, h5, li, button {
+	font-family: 'Proxima Nova' , Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+h1 {
+	font-size: 32px;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 24px;
+    font-weight: 800;
+}
+h3 {
+	font-size: 22px;
+	font-weight: 700;
+}
+
+
+a {
+	text-decoration: none;
+}
+
+html, body, #__next {
+	
+}
+
+#__next {
+	display: flex;
+}
+
+button {
+	cursor: pointer;
+	background: none;
+	border: none;
+	box-shadow: $box-shadow;
+
+	&:active {
+		border-color: none;
+	}
+}
+
+.b-cart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 90px 0 160px;
+
+    .b-cart {
+        width: 1000px;
+    }
+}
