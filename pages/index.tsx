@@ -4,7 +4,7 @@ import Category from '../src/components/Category/Category';
 export default function Index() {
   return (
       <PageContainer
-        pageTitle={"Вкусная пицца в Краснодаре!"}
+        pageTitle={"Самая вкусная пицца в Краснодаре!"}
         showCart={true}
       >
         <Category />

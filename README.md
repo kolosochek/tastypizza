@@ -1,5 +1,5 @@
 # Tasty pizza(Krasnodar_pizza)
-## https://tastypizza.temp/
+## https://tastypizza.vercel.app/
 ### Ecommerce pizza store. As hot as your girlfriend!
 
 [![pizza_video](https://raw.githubusercontent.com/kolosochek/pizza/main/github/images/pizza_player.png)](https://youtu.be/jRj42xA8ZB8)
