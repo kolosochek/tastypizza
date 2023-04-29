@@ -1,4 +1,5 @@
 import { createSlice, current } from '@reduxjs/toolkit'
+import { PizzaItemI } from '../api/DataAPI';
 
 function getCartSummary({ items, summary }){
     summary = { itemsTotal: 0, priceTotal: 0 }
@@ -17,7 +18,7 @@ function getCartSummary({ items, summary }){
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: [],
+    items: [] as PizzaItemI[],
     summary: {
       itemsTotal: 0,
       priceTotal: 0,
@@ -42,6 +43,9 @@ export const cartSlice = createSlice({
         }
         // if cart is empty, add choosen product to the cart
       } else {
+        // debug
+        console.log(action.payload)
+        //
         state.items.push(action.payload)
       }
       // update cart info

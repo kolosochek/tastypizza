@@ -1,28 +1,45 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { DataAPI, PizzaItemI } from '../api/DataAPI'
 
+let data = {}
+const getData = async () => {
+    data = await DataAPI.getData();
+    return data
+}
+
+
+
 export const categorySlice = createSlice({
     name: 'category',
-    initialState: DataAPI.getData(),
+    initialState: getData(),
     reducers: {
         getItemsByCategory: (state, action):PizzaItemI[] => {
-            let newArr = []
+            let newArr: PizzaItemI[] = []
             if (action.payload !== 'все') {
-                DataAPI.getData().map((item) => {
-                    item.category.map((category) => {
-                        if (category == action.payload) {
-                            newArr.push(item);
-                        }
+                DataAPI.getData().then((result) => {
+                    result.map((item) => {
+                        item.category.map((category) => {
+                            if (category == action.payload) {
+                                newArr.push(item);
+                            }
+                        })
                     })
+                    if (newArr.length){
+                        return newArr
+                    } else {
+                        return [];
+                    }
+                }).catch(error => {
+                    throw new Error(`Can't fetch data from backend, reason: ${error.reason || error}`)
                 })
-                if (newArr.length){
-                    return newArr
-                } else {
-                    return [];
-                }
             } else {
-                return DataAPI.getData()
+                DataAPI.getData().then((result) => {
+                    return result as PizzaItemI[]
+                }).catch(error => {
+                    throw new Error(`Can't fetch data from backend, reason: ${error.reason || error}`)
+                })
             }
+            return [];
         },
         sortCategoryByFilter: (state, action):PizzaItemI[] => {
             switch (action.payload) {
@@ -52,7 +69,7 @@ export const categorySlice = createSlice({
                     });
                     break;
                 default:
-                    return initialState
+                    return DataAPI.getData();
                     break;
             }
         },

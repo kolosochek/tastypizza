@@ -5,8 +5,8 @@ import cartReducer from './cartSlice'
 import categoryReducer from './categorySlice'
 import categoryItemReducer from './categoryItemSlice'
 
+
 export default configureStore({
-  preloadedState: DataAPI.getData() as PizzaItemI[],
   reducer: {
       cart: cartReducer, 
       category: categoryReducer,
