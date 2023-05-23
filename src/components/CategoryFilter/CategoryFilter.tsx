@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveFilter } from "../../redux/activeStateSlice";
+import { setActiveFilter } from "../../redux/filterByStateSlice";
 import { sortCategoryByFilter } from "../../redux/categorySlice";
 import styles from "./CategoryFilter.module.scss"
 
 const CategoryFilter = ({ categoryFilter }) => {
     // redux
-    const activeState = useSelector((state) => state.activeState)
+    const activeState = useSelector((state) => state.filterBy)
     const dispatch = useDispatch();
     const [div, setDiv] = useState({ isHidden: true })
     const [filter, setFilter] = useState({ activeFilter: activeState?.activeFilter });
-    const style = { visibility: div.isHidden ? 'hidden' : 'visible' };
 
 
     function toggleDiv() {
@@ -38,7 +37,9 @@ const CategoryFilter = ({ categoryFilter }) => {
                     <a onClick={() => toggleDiv()}
                         className={styles['b-link']}>{filter.activeFilter}</a>
                 </span>
-                <section id="filterBy" style={style}
+                <section id="filterBy" style={{
+                    visibility: div.isHidden ? "hidden" : "visible"
+                }}
                     className={styles['b-list-wrapper']}>
                     <ul className={styles['b-list']}>
                         {categoryFilter?.map((item, idx) => {

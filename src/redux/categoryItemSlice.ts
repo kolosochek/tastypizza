@@ -1,15 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { DataAPI, PizzaItemI } from '../api/DataAPI'
+import { DataAPI, IPizzaItem } from '../api/DataAPI'
 
 export const categoryItemSlice = createSlice({
     name: 'categoryItem',
     initialState: {},
     reducers: {
         setDoughType: (state, action):void => {
-            // debug
-            console.log(state)
-            console.log(action.payload)
-            //
         },
     },
 })

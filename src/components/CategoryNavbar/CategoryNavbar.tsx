@@ -3,11 +3,11 @@ import { useState } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { getItemsByCategory, sortCategoryByFilter } from "../../redux/categorySlice";
-import { setActiveCategory } from "../../redux/activeStateSlice";
+import { setActiveCategory } from "../../redux/filterByStateSlice";
 
 const CategoryNavbar = ({ categoryItems }) => {
     // redux
-    const activeState = useSelector((state) => state.activeState);
+    const activeState = useSelector((state) => state.filterBy);
     const dispatch = useDispatch();
     const [category, setCategory] = useState({ activeCategory: activeState?.activeCategory });
     

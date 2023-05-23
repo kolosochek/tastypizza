@@ -1,53 +1,56 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { DataAPI, PizzaItemI } from '../api/DataAPI'
-
-let data = {}
-const getData = async () => {
-    data = await DataAPI.getData();
-    return data
+import { IPizzaItem } from '../api/DataAPI'
+export type TCategoryNavbarItems = typeof categoryNavbarItems;
+export type TCategoryFilterItems = typeof categoryFilterItems;
+export const categoryNavbarItems = ['Все', 'Мясные', 'Вегетарианские', 'Гриль', 'Острые', 'Закрытые'] as const
+export const categoryFilterItems = ['популярности', 'цене', 'алфавиту'] as const
+export interface ICategorySliceState {
+    allItems: IPizzaItem[],
+    category: IPizzaItem[],
+    error: []
 }
-
-
-
+const initialState: ICategorySliceState = {
+    allItems: [],
+    category: [],
+    error: []
+}
 export const categorySlice = createSlice({
     name: 'category',
-    initialState: getData(),
+    initialState: initialState,
     reducers: {
-        getItemsByCategory: (state, action):PizzaItemI[] => {
-            let newArr: PizzaItemI[] = []
+        fetchPizzaAll: (state, action) => {
+            state.allItems = action.payload
+            state.category = action.payload
+        },
+        setError: (state, action) => {
+            state.error = action.payload
+        },
+        getItemsByCategory: (state, action) => {
+            let newArr: IPizzaItem[] = []
             if (action.payload !== 'все') {
-                DataAPI.getData().then((result) => {
-                    result.map((item) => {
+                    state.allItems.map((item) => {
                         item.category.map((category) => {
                             if (category == action.payload) {
                                 newArr.push(item);
                             }
                         })
-                    })
                     if (newArr.length){
-                        return newArr
+                        state.category = newArr
                     } else {
-                        return [];
+                        return state.category = [];
                     }
-                }).catch(error => {
-                    throw new Error(`Can't fetch data from backend, reason: ${error.reason || error}`)
                 })
             } else {
-                DataAPI.getData().then((result) => {
-                    return result as PizzaItemI[]
-                }).catch(error => {
-                    throw new Error(`Can't fetch data from backend, reason: ${error.reason || error}`)
-                })
+                state.category = state.allItems
             }
-            return [];
         },
-        sortCategoryByFilter: (state, action):PizzaItemI[] => {
-            switch (action.payload) {
+        sortCategoryByFilter: (state, action) => {
+            switch (action.payload as keyof TCategoryFilterItems) {
                 case 'алфавиту':
-                    state.sort((a, b) => a.title.localeCompare(b.title));
+                    state.category.sort((a, b) => a.title.localeCompare(b.title));
                     break;
                 case 'цене':
-                    state = state.sort((a, b) => {
+                    state.category = state.category.sort((a, b) => {
                         if (a.price > b.price) {
                             return 1;
                         }
@@ -58,7 +61,7 @@ export const categorySlice = createSlice({
                     });
                     break;
                 case 'популярности':
-                    state.sort((a, b) => {
+                    state.category.sort((a, b) => {
                         if (a.popularity > b.popularity) {
                             return 1;
                         }
@@ -69,13 +72,13 @@ export const categorySlice = createSlice({
                     });
                     break;
                 default:
-                    return DataAPI.getData();
+                    state.category = state.allItems
                     break;
             }
         },
     },
 })
 
-export const { getItemsByCategory, sortCategoryByFilter } = categorySlice.actions
+export const { getItemsByCategory, sortCategoryByFilter, fetchPizzaAll, setError } = categorySlice.actions
 
 export default categorySlice.reducer

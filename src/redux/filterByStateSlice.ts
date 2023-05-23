@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const capitalize_string = (str:string) => str.length ? str.charAt(0).toUpperCase() + str.slice(1) : false
 
 
-export const activeStateSlice = createSlice({
-    name: 'activeState',
+export const filterByStateSlice = createSlice({
+    name: 'filterBy',
     initialState: {
         activeCategory: capitalize_string('все'),
         activeFilter: 'популярности'
@@ -24,6 +24,6 @@ export const activeStateSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setActiveCategory, setActiveFilter } = activeStateSlice.actions
+export const { setActiveCategory, setActiveFilter } = filterByStateSlice.actions
 
-export default activeStateSlice.reducer
+export default filterByStateSlice.reducer

@@ -1,8 +1,8 @@
 import { CSSReset } from "@chakra-ui/react";
 import Head from "next/head";
-import styles from "./PageContainer.module.scss"
 import CartSmall from "../CartSmall/CartSmall";
 import Logo from "../Logo/Logo";
+import styles from "./PageContainer.module.scss"
 
 
 const PageContainer = ({ pageTitle, children, showCart }) => {

@@ -1,5 +1,5 @@
-import { createSlice, current } from '@reduxjs/toolkit'
-import { PizzaItemI } from '../api/DataAPI';
+import { createSlice } from '@reduxjs/toolkit'
+import { IPizzaItem } from '../api/DataAPI';
 
 function getCartSummary({ items, summary }){
     summary = { itemsTotal: 0, priceTotal: 0 }
@@ -15,15 +15,24 @@ function getCartSummary({ items, summary }){
     }
   }
 
+export interface ICartSliceState {
+  items: IPizzaItem[],
+  summary: {
+    itemsTotal: number,
+    priceTotal: number,
+  }
+}
+
+const initialState: ICartSliceState = {
+  items: [],
+  summary: {
+    itemsTotal: 0,
+    priceTotal: 0,
+  }
+}
 export const cartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    items: [] as PizzaItemI[],
-    summary: {
-      itemsTotal: 0,
-      priceTotal: 0,
-    }
-  },
+  initialState: initialState,
   reducers: {
     addToCart: (state, action) => {
       // something is already in the cart?
@@ -43,9 +52,6 @@ export const cartSlice = createSlice({
         }
         // if cart is empty, add choosen product to the cart
       } else {
-        // debug
-        console.log(action.payload)
-        //
         state.items.push(action.payload)
       }
       // update cart info
@@ -56,13 +62,11 @@ export const cartSlice = createSlice({
       // update cart info
       state.summary = getCartSummary(state)
     },
-
     deleteCartItemById: (state, action) => {
       state.items = state.items.filter((item, idx) => idx !== action.payload)
       // update cart info
       state.summary = getCartSummary(state)
     },
-
     incrementCartItemById: (state, action) => {
       state.items.map((item, idx) => {
         if (action.payload === idx) {
@@ -72,7 +76,6 @@ export const cartSlice = createSlice({
       // update cart info
       state.summary = getCartSummary(state)
     },
-
     decrementCartItemById: (state, action) => {
       state.items.map((item, idx) => {
         if (action.payload === idx) {
@@ -88,10 +91,18 @@ export const cartSlice = createSlice({
       // update cart info
       state.summary = getCartSummary(state)
     },
-
+    getCartItemById: (state, action) => {
+      state.items.map((item, idx) => {
+        if (action.payload === idx) {
+          return state.items[idx].quantity
+        } else {
+          return 0
+        }
+      })
+    },
   },
 })
 
-export const { addToCart, clearCart, deleteCartItemById, incrementCartItemById, decrementCartItemById } = cartSlice.actions
+export const { addToCart, clearCart, deleteCartItemById, incrementCartItemById, decrementCartItemById, getCartItemById } = cartSlice.actions
 
 export default cartSlice.reducer

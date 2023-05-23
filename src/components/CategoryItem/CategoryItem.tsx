@@ -2,9 +2,9 @@ import Image from "next/image";
 import styles from "./CategoryItem.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cartSlice";
+import {addToCart, getCartItemById, ICartSliceState} from "../../redux/cartSlice";
 import { setDoughType } from "../../redux/categoryItemSlice";
-import { PizzaItemI } from "../../api/DataAPI";
+import { IPizzaItem } from "../../api/DataAPI";
 
 // categoryItem params
 const doughTypeArr =
@@ -18,18 +18,20 @@ const pizzaSizeArr =
         { type: 32, price: 180 },
         { type: 40, price: 290 },
     ]
-
-const CategoryItem = ({ categoryItem }) => {
-
+export interface ICategoryItem {
+    categoryItem: IPizzaItem,
+    cartQuantity: IPizzaItem["quantity"]
+}
+const CategoryItem = ({ categoryItem, cartQuantity }: ICategoryItem) => {
     // redux
     const dispatch = useDispatch();
     // react hooks
     const [dough, setDough] = useState({ type: doughTypeArr[0].type, price: doughTypeArr[0].price });
     const [size, setSize] = useState({ type: pizzaSizeArr[0].type, price: pizzaSizeArr[0].price });
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(cartQuantity || 0);
     // construct object which we'll pass to the cart
     const price = categoryItem?.price + size.price + dough.price
-    const pizzaObject:PizzaItemI = {
+    const pizzaObject: IPizzaItem = {
         image: categoryItem?.image,
         title: categoryItem?.title,
         product_options: {
