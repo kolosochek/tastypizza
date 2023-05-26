@@ -7,15 +7,15 @@ import styles from './Category.module.scss'
 import {useEffect, useState} from "react";
 import {getPizzaAll} from "../../redux/thunks";
 import store, {IReduxStore} from "../../redux/store";
-import {categoryFilterItems, categoryNavbarItems} from "../../redux/categorySlice";
+import {getItemsByCategory, IPizzaSliceState} from "../../redux/pizzaSlice";
 import {Loader} from "../Loader/Loader";
 import {ICartSliceState} from "../../redux/cartSlice";
-import {IPizzaItem} from "../../redux/pizzaSlice";
+import {categoryNavbarItems, categoryFilterItems, IPizzaItem} from "../../interfaces/IPizzaItem";
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 
-const checkItemCartQuantity = (pizzaItem: IPizzaItem, cartItems: ICartSliceState["items"]) => {
+const checkItemCartQuantity = (pizzaItem: IPizzaItem, cartItems: ICartSliceState["cartItems"]) => {
     let quantity = 0
     cartItems.forEach(item => {
         if (pizzaItem.title === item.title) {
@@ -28,14 +28,20 @@ const checkItemCartQuantity = (pizzaItem: IPizzaItem, cartItems: ICartSliceState
 const Category = ({showFilters}) => {
     // redux
     const dispatch = useAppDispatch()
-    const {allItems, category, error} = useSelector((state: IReduxStore) => state.category)
-    const {items} = useSelector((state: IReduxStore) => state.cart)
+    const {allItems, category, error}: Partial<IPizzaSliceState> = useSelector<IReduxStore>((state) => state.pizza)
+    const {cartItems}: Partial<ICartSliceState> = useSelector<IReduxStore>((state) => state.cart)
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    let filterBy = useSelector((state: IReduxStore) => state.filterBy)
+    const {activeCategory} = useSelector<IReduxStore>((state) => state.filterBy)
 
     useEffect(() => {
-        dispatch(getPizzaAll())
-        setIsLoading(false)
+        const isActiveCategoryFilter = activeCategory.toLowerCase() !== categoryNavbarItems[0].toLowerCase()
+        if (!isActiveCategoryFilter) {
+            dispatch(getPizzaAll())
+            setIsLoading(false)
+        } else {
+            dispatch(getItemsByCategory(activeCategory.toLowerCase()))
+            setIsLoading(false)
+        }
     }, [isLoading])
 
     return isLoading ? (<Loader/>) : (
@@ -49,14 +55,14 @@ const Category = ({showFilters}) => {
                 ></CategoryFilter>
             </div>
             <div className={styles['b-pizza-category-wrapper']}>
-                <h1 className={styles['b-pizza-category-title']}>{category.length ? filterBy.activeCategory + ' пиццы' : ''} </h1>
+                <h1 className={styles['b-pizza-category-title']}>{category.length ? activeCategory + ' пиццы' : ''} </h1>
                 <section className={styles['b-pizza-category']}>
                     {category.length
                         ? category.map((item, idx) => (
                             <CategoryItem
                                 key={`b-pizza-item-${item.title}`}
                                 categoryItem={item}
-                                cartQuantity={items && checkItemCartQuantity(item, items)}
+                                cartQuantity={cartItems && checkItemCartQuantity(item, cartItems)}
                             ></CategoryItem>
                         ))
                         : <CategoryEmpty/>

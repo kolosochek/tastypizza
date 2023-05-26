@@ -1,13 +1,13 @@
 import PageContainer from "../src/components/PageContainer/PageContainer";
 import CartEmpty from "../src/components/CartEmpty/CartEmpty";
 import CartItem from "../src/components/CartItem/CartItem";
-// redux
 import { useSelector } from "react-redux";
+import {IReduxStore} from "../src/redux/store";
+import {ICartSliceState} from "../src/redux/cartSlice";
 
 
 const CartPage = () => {
-    // redux
-    const cart = useSelector((state) => state.cart.items)
+    const { cartItems }: Partial<ICartSliceState> = useSelector<IReduxStore>((state) => state.cart)
 
     return (
         <>
@@ -17,7 +17,7 @@ const CartPage = () => {
             >
                 <div className='b-cart-wrapper'>
                     <section className='b-cart'>
-                        {cart?.length
+                        {cartItems?.length
                             ? <CartItem />
                             : <CartEmpty />
                         }

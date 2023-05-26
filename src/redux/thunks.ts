@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {fetchPizzaAll, setError} from "./categorySlice";
+import {fetchPizzaAll, setError} from "./pizzaSlice";
 import {DataAPI} from "../api/DataAPI";
 
 export const getPizzaAll = createAsyncThunk(

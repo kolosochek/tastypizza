@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveFilter } from "../../redux/filterByStateSlice";
-import { sortCategoryByFilter } from "../../redux/categorySlice";
+import {IFilterBySliceState, setActiveFilter} from "../../redux/filterByStateSlice";
+import { sortCategoryByFilter } from "../../redux/pizzaSlice";
 import styles from "./CategoryFilter.module.scss"
+import {IReduxStore} from "../../redux/store";
 
 const CategoryFilter = ({ categoryFilter }) => {
-    // redux
-    const activeState = useSelector((state) => state.filterBy)
     const dispatch = useDispatch();
+    const { activeCategory, activeFilter }: Partial<IFilterBySliceState> = useSelector<IReduxStore>((state) => state.filterBy)
     const [div, setDiv] = useState({ isHidden: true })
-    const [filter, setFilter] = useState({ activeFilter: activeState?.activeFilter });
-
+    const [filter, setFilter] = useState({ activeFilter: activeFilter });
 
     function toggleDiv() {
         setDiv({ isHidden: !div.isHidden });

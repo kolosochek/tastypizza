@@ -2,9 +2,9 @@ import Image from "next/image";
 import styles from "./CategoryItem.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {addToCart, getCartItemById, ICartSliceState} from "../../redux/cartSlice";
+import {addToCart} from "../../redux/cartSlice";
 import { setDoughType } from "../../redux/categoryItemSlice";
-import { IPizzaItem } from "../../api/DataAPI";
+import { IPizzaItem } from "../../interfaces/IPizzaItem/PizzaItem";
 
 // categoryItem params
 const doughTypeArr =
@@ -31,7 +31,7 @@ const CategoryItem = ({ categoryItem, cartQuantity }: ICategoryItem) => {
     const [quantity, setQuantity] = useState(cartQuantity || 0);
     // construct object which we'll pass to the cart
     const price = categoryItem?.price + size.price + dough.price
-    const pizzaObject: IPizzaItem = {
+    const pizzaObject: Partial<IPizzaItem> = {
         image: categoryItem?.image,
         title: categoryItem?.title,
         product_options: {

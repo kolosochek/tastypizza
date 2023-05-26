@@ -1,14 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {capitalize_string} from "../utils";
+import {categoryFilterItems, categoryNavbarItems, TCategoryFilterItems, TCategoryNavbarItems} from "../interfaces/IPizzaItem";
 
-const capitalize_string = (str:string) => str.length ? str.charAt(0).toUpperCase() + str.slice(1) : false
+export interface IFilterBySliceState {
+    activeCategory: TCategoryFilterItems
+    activeFilter: TCategoryNavbarItems
+}
 
+const initialState: IFilterBySliceState = {
+    activeCategory: categoryNavbarItems[0],
+        activeFilter: categoryFilterItems[0],
+}
 
 export const filterByStateSlice = createSlice({
     name: 'filterBy',
-    initialState: {
-        activeCategory: capitalize_string('все'),
-        activeFilter: 'популярности'
-    },
+    initialState:  initialState,
     reducers: {
         setActiveCategory: (state, action) => {
             if (action.payload.length) {

@@ -2,7 +2,7 @@ import styles from "./CategoryNavbar.module.scss"
 import { useState } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { getItemsByCategory, sortCategoryByFilter } from "../../redux/categorySlice";
+import { getItemsByCategory, sortCategoryByFilter } from "../../redux/pizzaSlice";
 import { setActiveCategory } from "../../redux/filterByStateSlice";
 
 const CategoryNavbar = ({ categoryItems }) => {

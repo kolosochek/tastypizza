@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { DataAPI, IPizzaItem } from '../api/DataAPI'
 
 export const categoryItemSlice = createSlice({
     name: 'categoryItem',
